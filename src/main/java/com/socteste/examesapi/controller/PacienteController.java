@@ -6,16 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.socteste.examesapi.model.Exame;
+import com.socteste.examesapi.model.Paciente;
 
 @RestController
-@RequestMapping("/exames")
-public class ExameController {
+@RequestMapping("/pacientes")
+public class PacienteController {
 	
 	@GetMapping
-	public List<Exame> listar(){
+	public List<Paciente> listar(){
 		return null;
 	}
-
 	
 }
