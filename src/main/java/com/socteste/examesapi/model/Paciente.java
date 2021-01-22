@@ -22,7 +22,7 @@ public class Paciente {
 
 	@Id
 	@NotBlank
-	private String cnpj;
+	private String cpf;
 	
 	@NotBlank
 	private String nomePaciente;
