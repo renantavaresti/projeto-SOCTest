@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.socteste.examesapi.model.Paciente;
 
 @RestController
-@RequestMapping("/pacientes")
+@RequestMapping(value="pacientes")
 public class PacienteController {
 	
 	@GetMapping
-	public List<Paciente> listar(){
+	public List<Paciente> listarTodosPacientes(){
 		return null;
 	}
 	
