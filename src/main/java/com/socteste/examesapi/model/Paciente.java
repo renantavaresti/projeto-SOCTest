@@ -12,20 +12,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter 
 @Builder
-@NoArgsConstructor //Cria construtor vazio - lombok
-@AllArgsConstructor //Cria construtor com todos os atributos
-@Table(name ="TB_PACIENTE")
+@NoArgsConstructor /* Cria construtor vazio - lombok */
+@AllArgsConstructor /* Cria construtor com todos os atributos */
+@Table(name = "TB_PACIENTE")
 public class Paciente {
 
 	@Id
 	@NotBlank
+	@Getter
 	private String cpf;
-	
-	@NotBlank
-	private String nomePaciente;
 
+	@NotBlank
+	@Getter
+	@Setter
+	private String nomePaciente;
 
 }

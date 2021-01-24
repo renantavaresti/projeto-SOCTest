@@ -18,40 +18,40 @@ import com.socteste.examesapi.model.Paciente;
 import com.socteste.examesapi.service.PacienteService;
 
 @RestController
-@RequestMapping(value="pacientes")
+@RequestMapping(value = "/pacientes")
 public class PacienteController {
-	
+
 	@Autowired
 	private PacienteService pc;
-	
+
 	@CrossOrigin
 	@GetMapping
-	public List<Paciente> listarTodosPacientes(){
+	public List<Paciente> listarTodosPacientes() {
 		return pc.listarPaciente();
 	}
-	
+
 	@CrossOrigin
 	@GetMapping("/{id}")
 	public Paciente listarUnicoPaciente(@PathVariable(value = "id") String id) {
 		return pc.listarUnicoPaciente(id);
 	}
-	
+
 	@CrossOrigin
 	@PostMapping
-	public ResponseEntity<String> cadastarPaciente(@RequestBody Paciente paciente){
+	public ResponseEntity<String> cadastarPaciente(@RequestBody Paciente paciente) {
 		return pc.cadastrarPaciente(paciente);
 	}
-	
+
 	@CrossOrigin
 	@PutMapping
-	public ResponseEntity<String> atualizarPaciente(@RequestBody Paciente paciente){
+	public ResponseEntity<String> atualizarPaciente(@RequestBody Paciente paciente) {
 		return pc.atualizarPaciente(paciente);
 	}
-	
+
 	@CrossOrigin
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deletarPaciente(@PathVariable(value="id") String id){
+	public ResponseEntity<String> deletarPaciente(@PathVariable(value = "id") String id) {
 		return pc.deletarPaciente(id);
 	}
-	
+
 }

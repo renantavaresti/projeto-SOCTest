@@ -11,11 +11,10 @@ import com.socteste.examesapi.model.Exame;
 @RestController
 @RequestMapping("/exames")
 public class ExameController {
-	
+
 	@GetMapping
-	public List<Exame> listar(){
+	public List<Exame> listar() {
 		return null;
 	}
 
-	
 }
