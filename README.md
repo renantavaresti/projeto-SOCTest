@@ -8,12 +8,12 @@ O projeto foi criado com Spring Boot na linguagem de programação Java com BD M
 O projeto está divido nas seguintes camadas:
 
 *main:*
-1. Model - @Entity
-2. Repository
-3. Service
-4. Service Impl
-5. Controller
-6. Dto
+1. Model - Entidades.
+2. Repository - Comunicação/interação com o banco de dados.
+3. Service - Cabeçalhos dos métodos (Contratos de função).
+4. Service Impl - "Impl"ementação dos contratos da Service.
+5. Controller - Definição das Rotas. Requisitando os serviços (Service) que serão executados conforme demandados.
+6. Dto - Comunicação entre cliente e o servidor.
 
 ## Como executar
 1. Clonar o projeto
