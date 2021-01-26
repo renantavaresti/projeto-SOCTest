@@ -9,8 +9,10 @@ import lombok.Data;
 		 */
 @Builder /* Utiliza o Padrão Builder na classe */
 public class ExameDTO {
+	
 	private Long id;
 	private String nomeExame;
 	private String observacao;
 	private String resultadoExame;
+	
 }

@@ -22,7 +22,7 @@ public class Exame {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter
+	@Getter @Setter
 	private Long id;
 
 	@Column(nullable = false)

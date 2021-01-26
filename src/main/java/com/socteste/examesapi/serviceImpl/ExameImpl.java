@@ -36,6 +36,7 @@ public class ExameImpl implements ExameService {
 			return ResponseEntity.status(HttpStatus.CONFLICT)
 					.body("Exame cod. " + exame.getId() + " já está cadastrado!");
 		}
+		ex.save(exame);
 		return ResponseEntity.ok("Exame cadastrado com sucesso!");
 	}
 

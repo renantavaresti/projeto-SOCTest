@@ -36,6 +36,7 @@ public class PacienteImpl implements PacienteService {
 			return ResponseEntity.status(HttpStatus.CONFLICT)
 					.body("Paciente de CPF " + paciente.getCpf() + " já está cadastrado!");
 		}
+		pc.save(paciente);
 		return ResponseEntity.ok("Paciente cadastrado com sucesso!");
 	}
 
