@@ -13,7 +13,7 @@ O projeto está divido nas seguintes camadas:
 3. Service - Cabeçalhos dos métodos (Contratos de função).
 4. Service Impl - "Impl"ementação dos contratos da Service.
 5. Controller - Definição das Rotas. Requisitando os serviços (Service) que serão executados conforme demandados.
-6. Dto - Comunicação entre cliente e o servidor.
+6. Dto - Utilizado como modelo para o corpo das requisições e respostas.
 
 ## Como executar
 1. Clonar o projeto
