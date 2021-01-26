@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.socteste.examesapi.dto.PacienteDTO;
 import com.socteste.examesapi.model.Paciente;
 import com.socteste.examesapi.service.PacienteService;
 
@@ -43,8 +44,8 @@ public class PacienteController {
 
 	@PostMapping("/paciente")
 	@ApiOperation(value="Cadastra um Paciente")
-	public ResponseEntity<String> cadastarPaciente(@RequestBody Paciente paciente) {
-		return pc.cadastrarPaciente(paciente);
+	public ResponseEntity<String> cadastarPaciente(@RequestBody PacienteDTO pacDTO) {
+		return pc.cadastrarPaciente(pacDTO);
 	}
 
 	@PutMapping("/paciente")

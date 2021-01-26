@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.socteste.examesapi.dto.PacienteDTO;
 import com.socteste.examesapi.model.Paciente;
 
 public interface PacienteService {
@@ -13,7 +14,7 @@ public interface PacienteService {
 
 	Paciente listarUnicoPaciente(String id);
 
-	ResponseEntity<String> cadastrarPaciente(@RequestBody Paciente paciente);
+	ResponseEntity<String> cadastrarPaciente(@RequestBody PacienteDTO pacDTO);
 
 	ResponseEntity<String> atualizarPaciente(@RequestBody Paciente paciente);
 

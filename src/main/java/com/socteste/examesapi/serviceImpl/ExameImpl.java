@@ -1,14 +1,20 @@
 package com.socteste.examesapi.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import com.socteste.examesapi.dto.ExameDTO;
 import com.socteste.examesapi.model.Exame;
+import com.socteste.examesapi.model.Paciente;
 import com.socteste.examesapi.repository.ExameRepository;
+import com.socteste.examesapi.repository.PacienteRepository;
 import com.socteste.examesapi.service.ExameService;
 
 @Service
@@ -16,10 +22,23 @@ public class ExameImpl implements ExameService {
 
 	@Autowired
 	ExameRepository ex;
+	
+	@Autowired
+	PacienteRepository pc;
 
-	@Override
-	public List<Exame> listarExame() {
-		return ex.findAll();
+	public List<ExameDTO> listarExame() {
+		List<ExameDTO> listExameDTO = new ArrayList<>();
+		ex.findAll().forEach(exame ->{
+			ExameDTO builderDto = ExameDTO.builder()
+					.id(exame.getId())
+					.nomeExame(exame.getNomeExame())
+					.observacao(exame.getObservacao())
+					.resultadoExame(exame.getResultadoExame())
+					.cpf(exame.getPaciente().getCpf())
+					.build();
+			listExameDTO.add(builderDto);
+		});
+		return listExameDTO;
 	}
 
 	@Override
@@ -30,14 +49,28 @@ public class ExameImpl implements ExameService {
 		return null;
 	}
 
-	@Override
-	public ResponseEntity<String> cadastrarExame(Exame exame) {
-		if (ex.existsById(exame.getId())) {
-			return ResponseEntity.status(HttpStatus.CONFLICT)
-					.body("Exame cod. " + exame.getId() + " já está cadastrado!");
+	public ResponseEntity<String> cadastrarExame(@RequestBody ExameDTO exDTO) {
+		if (!ex.existsById(exDTO.getId())) {
+			Optional<Paciente> oppac = pc.findById(exDTO.getCpf());
+			if(!oppac.isPresent()) {
+				return ResponseEntity.status(HttpStatus.OK).body("CPF não encontrado, gentileza cadastrar Paciente!");
+			}
+			
+			Exame exame = Exame.builder()
+					.id(exDTO.getId())
+					.nomeExame(exDTO.getNomeExame())
+					.observacao(exDTO.getObservacao())
+					.resultadoExame(exDTO.getResultadoExame())
+					.paciente(oppac.get())
+					.build();
+			ex.save(exame);
+			return ResponseEntity.status(HttpStatus.OK).body("Exame cadastrado com sucesso!!");
 		}
-		ex.save(exame);
-		return ResponseEntity.ok("Exame cadastrado com sucesso!");
+		else {
+			return ResponseEntity.status(HttpStatus.CONFLICT)
+					.body("Exame cod. " + exDTO.getId() + " já está cadastrado!");
+		}
+		
 	}
 
 	@Override

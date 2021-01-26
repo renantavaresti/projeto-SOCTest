@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.socteste.examesapi.dto.PacienteDTO;
 import com.socteste.examesapi.model.Paciente;
 import com.socteste.examesapi.repository.PacienteRepository;
 import com.socteste.examesapi.service.PacienteService;
@@ -31,13 +32,18 @@ public class PacienteImpl implements PacienteService {
 	}
 
 	@Override
-	public ResponseEntity<String> cadastrarPaciente(Paciente paciente) {
-		if (pc.existsById(paciente.getCpf())) {
+	public ResponseEntity<String> cadastrarPaciente(PacienteDTO pacDTO) {
+		if (!pc.existsById(pacDTO.getCpf())) {
+			Paciente paciente = Paciente.builder()
+					.cpf(pacDTO.getCpf())
+					.nomePaciente(pacDTO.getNomePaciente())
+					.build();
+			pc.save(paciente);
+			return ResponseEntity.ok("Paciente cadastrado com sucesso!");
+		} else {
 			return ResponseEntity.status(HttpStatus.CONFLICT)
-					.body("Paciente de CPF " + paciente.getCpf() + " já está cadastrado!");
+					.body("Paciente de CPF " + pacDTO.getCpf() + " já está cadastrado!");
 		}
-		pc.save(paciente);
-		return ResponseEntity.ok("Paciente cadastrado com sucesso!");
 	}
 
 	@Override

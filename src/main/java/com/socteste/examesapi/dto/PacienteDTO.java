@@ -9,6 +9,14 @@ import lombok.Data;
 		 */
 @Builder /* Utiliza o Padrão Builder na classe */
 public class PacienteDTO {
-	private Long id;
+	private String cpf;
 	private String nomePaciente;
+	private Long idExame;
+	
+	public PacienteDTO(String cpf, String nomePaciente, Long idExame) {
+		super();
+		this.cpf = cpf;
+		this.nomePaciente = nomePaciente;
+		this.idExame = idExame;
+	}
 }

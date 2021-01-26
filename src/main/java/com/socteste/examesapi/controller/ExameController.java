@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.socteste.examesapi.dto.ExameDTO;
 import com.socteste.examesapi.model.Exame;
 import com.socteste.examesapi.service.ExameService;
 
@@ -25,13 +26,13 @@ import io.swagger.annotations.ApiOperation;
 @Api(value="API REST Exames")
 @CrossOrigin(origins="*") /*Qualquer dominio pode acessar essa API*/
 public class ExameController {
-
+	
 	@Autowired
 	private ExameService ex;
-
+		
 	@GetMapping("/exames")
 	@ApiOperation(value="Retorna uma lista de Exames")
-	public List<Exame> listarTodosExames() {
+	public List<ExameDTO> listarTodosExames() {
 		return ex.listarExame();
 	}
 
@@ -43,8 +44,8 @@ public class ExameController {
 
 	@PostMapping("/exames")
 	@ApiOperation(value="Cadastra um Exame")
-	public ResponseEntity<String> cadastarExame(@RequestBody Exame exame) {
-		return ex.cadastrarExame(exame);
+	public ResponseEntity<String> cadastarExame(@RequestBody ExameDTO exDTO) {
+		return ex.cadastrarExame(exDTO);
 	}
 
 	@PutMapping("/exames")
