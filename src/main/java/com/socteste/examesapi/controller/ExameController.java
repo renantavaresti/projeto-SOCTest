@@ -18,38 +18,38 @@ import com.socteste.examesapi.model.Exame;
 import com.socteste.examesapi.service.ExameService;
 
 @RestController
-@RequestMapping(value = "/exames")
+@RequestMapping(value = "/api")
 public class ExameController {
 
 	@Autowired
 	private ExameService ex;
 
 	@CrossOrigin
-	@GetMapping
+	@GetMapping("/exames")
 	public List<Exame> listarTodosExames() {
 		return ex.listarExame();
 	}
 
 	@CrossOrigin
-	@GetMapping("/{id}")
+	@GetMapping("/exames/{id}")
 	public Exame listarUnicoExame(@PathVariable(value = "id") Long id) {
 		return ex.listarUnicoExame(id);
 	}
 
 	@CrossOrigin
-	@PostMapping
+	@PostMapping("/exames")
 	public ResponseEntity<String> cadastarExame(@RequestBody Exame exame) {
 		return ex.cadastrarExame(exame);
 	}
 
 	@CrossOrigin
-	@PutMapping
+	@PutMapping("/exames")
 	public ResponseEntity<String> atualizarExame(@RequestBody Exame exame) {
 		return ex.atualizarExame(exame);
 	}
 
 	@CrossOrigin
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/exames/{id}")
 	public ResponseEntity<String> deletarExame(@PathVariable(value = "id") Long id) {
 		return ex.deletarExame(id);
 	}
