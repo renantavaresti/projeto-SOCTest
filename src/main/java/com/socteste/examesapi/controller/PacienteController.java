@@ -17,39 +17,44 @@ import org.springframework.web.bind.annotation.RestController;
 import com.socteste.examesapi.model.Paciente;
 import com.socteste.examesapi.service.PacienteService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/api")
+@Api(value="API REST Exames")
+@CrossOrigin(origins="*") /*Qualquer dominio pode acessar essa API*/
 public class PacienteController {
 
 	@Autowired
 	private PacienteService pc;
 
-	@CrossOrigin
 	@GetMapping("/paciente")
+	@ApiOperation(value="Retorna uma lista de Pacientes")
 	public List<Paciente> listarTodosPacientes() {
 		return pc.listarPaciente();
 	}
 
-	@CrossOrigin
 	@GetMapping("/paciente/{id}")
+	@ApiOperation(value="Retorna um unico Paciente")
 	public Paciente listarUnicoPaciente(@PathVariable(value = "id") String id) {
 		return pc.listarUnicoPaciente(id);
 	}
 
-	@CrossOrigin
 	@PostMapping("/paciente")
+	@ApiOperation(value="Cadastra um Paciente")
 	public ResponseEntity<String> cadastarPaciente(@RequestBody Paciente paciente) {
 		return pc.cadastrarPaciente(paciente);
 	}
 
-	@CrossOrigin
 	@PutMapping("/paciente")
+	@ApiOperation(value="Atualiza um Paciente")
 	public ResponseEntity<String> atualizarPaciente(@RequestBody Paciente paciente) {
 		return pc.atualizarPaciente(paciente);
 	}
 
-	@CrossOrigin
 	@DeleteMapping("/paciente/{id}")
+	@ApiOperation(value="Deleta um Paciente")
 	public ResponseEntity<String> deletarPaciente(@PathVariable(value = "id") String id) {
 		return pc.deletarPaciente(id);
 	}

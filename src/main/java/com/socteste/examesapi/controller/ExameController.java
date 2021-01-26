@@ -17,39 +17,44 @@ import org.springframework.web.bind.annotation.RestController;
 import com.socteste.examesapi.model.Exame;
 import com.socteste.examesapi.service.ExameService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/api")
+@Api(value="API REST Exames")
+@CrossOrigin(origins="*") /*Qualquer dominio pode acessar essa API*/
 public class ExameController {
 
 	@Autowired
 	private ExameService ex;
 
-	@CrossOrigin
 	@GetMapping("/exames")
+	@ApiOperation(value="Retorna uma lista de Exames")
 	public List<Exame> listarTodosExames() {
 		return ex.listarExame();
 	}
 
-	@CrossOrigin
 	@GetMapping("/exames/{id}")
+	@ApiOperation(value="Retorna um unico Exame")
 	public Exame listarUnicoExame(@PathVariable(value = "id") Long id) {
 		return ex.listarUnicoExame(id);
 	}
 
-	@CrossOrigin
 	@PostMapping("/exames")
+	@ApiOperation(value="Cadastra um Exame")
 	public ResponseEntity<String> cadastarExame(@RequestBody Exame exame) {
 		return ex.cadastrarExame(exame);
 	}
 
-	@CrossOrigin
 	@PutMapping("/exames")
+	@ApiOperation(value="Atualiza um Exame")
 	public ResponseEntity<String> atualizarExame(@RequestBody Exame exame) {
 		return ex.atualizarExame(exame);
 	}
 
-	@CrossOrigin
 	@DeleteMapping("/exames/{id}")
+	@ApiOperation(value="Deleta um Exame")
 	public ResponseEntity<String> deletarExame(@PathVariable(value = "id") Long id) {
 		return ex.deletarExame(id);
 	}
