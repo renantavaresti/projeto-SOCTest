@@ -31,9 +31,13 @@ public class Exame {
 
 	@NotBlank
 	private String nomeExame;
-
+	@NotBlank
 	private String observacao;
-
+	@NotBlank
 	private String resultadoExame;
+	@NotBlank
+	private String cpf;
+	@NotBlank
+	private String nomePaciente;
 
 }

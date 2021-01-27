@@ -15,6 +15,6 @@ public class ExameDTO {
 	private String observacao;
 	private String resultadoExame;
 	private String cpf;
-	private String paciente;
+	private String nomePaciente;
 
 }

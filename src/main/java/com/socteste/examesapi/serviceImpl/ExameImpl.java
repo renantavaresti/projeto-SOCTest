@@ -1,7 +1,6 @@
 package com.socteste.examesapi.serviceImpl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.socteste.examesapi.dto.ExameDTO;
 import com.socteste.examesapi.model.Exame;
-import com.socteste.examesapi.model.Paciente;
 import com.socteste.examesapi.repository.ExameRepository;
 import com.socteste.examesapi.repository.PacienteRepository;
 import com.socteste.examesapi.service.ExameService;
@@ -47,6 +45,8 @@ public class ExameImpl implements ExameService {
 				.nomeExame(exDTO.getNomeExame())
 				.observacao(exDTO.getObservacao())
 				.resultadoExame(exDTO.getResultadoExame())
+				.cpf(exDTO.getCpf())
+				.nomePaciente(exDTO.getNomePaciente())
 				.build();
 		ex.save(exame);
 		return ResponseEntity.status(HttpStatus.OK).body("Exame cadastrado com sucesso!!");
