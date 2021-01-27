@@ -28,36 +28,35 @@ import io.swagger.annotations.ApiOperation;
 public class ExameController {
 	
 	@Autowired
-	private ExameService ex;
+	private ExameService exameService;
 		
 	@GetMapping("/exames")
 	@ApiOperation(value="Retorna uma lista de Exames")
 	public List<Exame> listarTodosExames() {
-		return ex.listarExame();
+		return exameService.listarExame();
 	}
 
-	@GetMapping("/exames/{id}")
+	@GetMapping("/exame/{id}")
 	@ApiOperation(value="Retorna um unico Exame")
-	public Exame listarUnicoExame(@PathVariable(value = "id") Long id) {
-		return ex.listarUnicoExame(id);
+	public Exame listarUnicoExame(@PathVariable(value = "id") long id) {
+		return exameService.listarUnicoExame(id);
 	}
 
-	@PostMapping("/exames")
+	@PostMapping("/exame")
 	@ApiOperation(value="Cadastra um Exame")
-	public ResponseEntity<String> cadastarExame(@RequestBody ExameDTO exDTO) {
-		return ex.cadastrarExame(exDTO);
+	public ResponseEntity<String> cadastarExame(@RequestBody ExameDTO exame) {
+		return exameService.cadastrarExame(exame);
 	}
 
 	@PutMapping("/exames")
 	@ApiOperation(value="Atualiza um Exame")
 	public ResponseEntity<String> atualizarExame(@RequestBody Exame exame) {
-		return ex.atualizarExame(exame);
+		return exameService.atualizarExame(exame);
 	}
 
 	@DeleteMapping("/exames/{id}")
 	@ApiOperation(value="Deleta um Exame")
-	public ResponseEntity<String> deletarExame(@PathVariable(value = "id") Long id) {
-		return ex.deletarExame(id);
+	public ResponseEntity<String> deletarExame(@PathVariable(value = "id") long id) {
+		return exameService.deletarExame(id);
 	}
-
 }

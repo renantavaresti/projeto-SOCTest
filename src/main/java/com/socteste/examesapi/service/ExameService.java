@@ -12,7 +12,8 @@ public interface ExameService {
 
 	List<Exame> listarExame();
 	Exame listarUnicoExame(Long id);
-	ResponseEntity<String> cadastrarExame(@RequestBody ExameDTO exDTO);
+	ResponseEntity<String> cadastrarExame(@RequestBody ExameDTO exame);
 	ResponseEntity<String> atualizarExame(@RequestBody Exame exame);
 	ResponseEntity<String> deletarExame(Long id);
+	
 }

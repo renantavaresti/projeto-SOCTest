@@ -18,55 +18,50 @@ import com.socteste.examesapi.service.ExameService;
 public class ExameImpl implements ExameService {
 
 	@Autowired
-	ExameRepository ex;
+	ExameRepository exameRepository;
 
-	@Autowired
-	PacienteRepository pc;
+//	@Autowired
+//	PacienteRepository pc;
 
 	public List<Exame> listarExame() {
-		return ex.findAll();
+		return exameRepository.findAll();
 	}
 
 	@Override
 	public Exame listarUnicoExame(Long id) {
-		if (ex.existsById(id)) {
-			return ex.findById(id).get();
+		if (exameRepository.existsById(id)) {
+			return exameRepository.findById(id).get();
 		}
 		return null;
 	}
 
-	public ResponseEntity<String> cadastrarExame(@RequestBody ExameDTO exDTO) {
-		if (ex.existsById(exDTO.getId())) {
-			return ResponseEntity.status(HttpStatus.CONFLICT)
-					.body("Exame cod. " + exDTO.getId() + " já está cadastrado!");
-		}
-		Exame exame = Exame.builder()
-				.id(exDTO.getId())
-				.nomeExame(exDTO.getNomeExame())
-				.observacao(exDTO.getObservacao())
-				.resultadoExame(exDTO.getResultadoExame())
-				.cpf(exDTO.getCpf())
-				.nomePaciente(exDTO.getNomePaciente())
+	public ResponseEntity<String> cadastrarExame(@RequestBody ExameDTO exame) {
+		Exame exam = Exame.builder().nomeExame(exame.getNomeExame())
+				.observacao(exame.getObservacao())
+				.resultadoExame(exame.getResultadoExame())
+				.cpf(exame.getCpf())
+				.nomePaciente(exame.getNomePaciente())
 				.build();
-		ex.save(exame);
-		return ResponseEntity.status(HttpStatus.OK).body("Exame cadastrado com sucesso!!");
+		exameRepository.save(exam);
+		return ResponseEntity.status(HttpStatus.OK).body("Cadastrado com Sucesso!");
 	}
 
 	@Override
-	public ResponseEntity<String> atualizarExame(Exame exame) {
-		if (ex.existsById(exame.getId())) {
-			ex.save(exame);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Exame atualizado com sucesso!");
+	public ResponseEntity<String> atualizarExame(@RequestBody Exame exame) {
+		if(exameRepository.existsById(exame.getId())) {
+			exameRepository.save(exame);
+			return ResponseEntity.status(HttpStatus.OK).body("Exame atualizado com sucesso!");
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não Foi possivel atualizar Exame!");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possível atualizar exame!!");
 	}
+		
 
 	@Override
 	public ResponseEntity<String> deletarExame(Long id) {
-		if (ex.existsById(id)) {
-			ex.deleteById(id);
-			return ResponseEntity.ok("Exame deletado com sucesso!");
+		if (!exameRepository.existsById(id)) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Exame não encontrado!");
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possível deletar Exame!");
+		exameRepository.deleteById(id);
+		return ResponseEntity.status(HttpStatus.OK).body("Deletado com sucesso!!!");
 	}
 }

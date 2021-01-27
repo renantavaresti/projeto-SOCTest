@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableScheduling
-@ComponentScan
-@Configuration
+//@EnableScheduling
+//@ComponentScan
+//@Configuration
 public class ExamesApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ExamesApiApplication.class, args);
