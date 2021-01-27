@@ -48,13 +48,13 @@ public class ExameController {
 		return exameService.cadastrarExame(exame);
 	}
 
-	@PutMapping("/exames")
+	@PutMapping("/exame")
 	@ApiOperation(value="Atualiza um Exame")
 	public ResponseEntity<String> atualizarExame(@RequestBody Exame exame) {
 		return exameService.atualizarExame(exame);
 	}
 
-	@DeleteMapping("/exames/{id}")
+	@DeleteMapping("/exame/{id}")
 	@ApiOperation(value="Deleta um Exame")
 	public ResponseEntity<String> deletarExame(@PathVariable(value = "id") long id) {
 		return exameService.deletarExame(id);

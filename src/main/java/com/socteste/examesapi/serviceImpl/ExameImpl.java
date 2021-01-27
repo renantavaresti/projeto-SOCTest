@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.socteste.examesapi.dto.ExameDTO;
 import com.socteste.examesapi.model.Exame;
 import com.socteste.examesapi.repository.ExameRepository;
-import com.socteste.examesapi.repository.PacienteRepository;
 import com.socteste.examesapi.service.ExameService;
 
 @Service
