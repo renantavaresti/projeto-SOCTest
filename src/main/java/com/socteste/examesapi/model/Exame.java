@@ -28,18 +28,12 @@ public class Exame {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	private String nomeExame;
 
 	private String observacao;
 
 	private String resultadoExame;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "paciente")
-	private Paciente paciente;
-	
-
 
 }

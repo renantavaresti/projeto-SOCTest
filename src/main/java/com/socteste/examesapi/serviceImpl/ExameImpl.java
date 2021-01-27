@@ -1,6 +1,5 @@
 package com.socteste.examesapi.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,23 +21,12 @@ public class ExameImpl implements ExameService {
 
 	@Autowired
 	ExameRepository ex;
-	
+
 	@Autowired
 	PacienteRepository pc;
 
-	public List<ExameDTO> listarExame() {
-		List<ExameDTO> listExameDTO = new ArrayList<>();
-		ex.findAll().forEach(exame ->{
-			ExameDTO builderDto = ExameDTO.builder()
-					.id(exame.getId())
-					.nomeExame(exame.getNomeExame())
-					.observacao(exame.getObservacao())
-					.resultadoExame(exame.getResultadoExame())
-					.cpf(exame.getPaciente().getCpf())
-					.build();
-			listExameDTO.add(builderDto);
-		});
-		return listExameDTO;
+	public List<Exame> listarExame() {
+		return ex.findAll();
 	}
 
 	@Override
@@ -50,27 +38,18 @@ public class ExameImpl implements ExameService {
 	}
 
 	public ResponseEntity<String> cadastrarExame(@RequestBody ExameDTO exDTO) {
-		if (!ex.existsById(exDTO.getId())) {
-			Optional<Paciente> oppac = pc.findById(exDTO.getCpf());
-			if(!oppac.isPresent()) {
-				return ResponseEntity.status(HttpStatus.OK).body("CPF não encontrado, gentileza cadastrar Paciente!");
-			}
-			
-			Exame exame = Exame.builder()
-					.id(exDTO.getId())
-					.nomeExame(exDTO.getNomeExame())
-					.observacao(exDTO.getObservacao())
-					.resultadoExame(exDTO.getResultadoExame())
-					.paciente(oppac.get())
-					.build();
-			ex.save(exame);
-			return ResponseEntity.status(HttpStatus.OK).body("Exame cadastrado com sucesso!!");
-		}
-		else {
+		if (ex.existsById(exDTO.getId())) {
 			return ResponseEntity.status(HttpStatus.CONFLICT)
 					.body("Exame cod. " + exDTO.getId() + " já está cadastrado!");
 		}
-		
+		Exame exame = Exame.builder()
+				.id(exDTO.getId())
+				.nomeExame(exDTO.getNomeExame())
+				.observacao(exDTO.getObservacao())
+				.resultadoExame(exDTO.getResultadoExame())
+				.build();
+		ex.save(exame);
+		return ResponseEntity.status(HttpStatus.OK).body("Exame cadastrado com sucesso!!");
 	}
 
 	@Override

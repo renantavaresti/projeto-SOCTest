@@ -10,7 +10,7 @@ import com.socteste.examesapi.model.Exame;
 
 public interface ExameService {
 
-	List<ExameDTO> listarExame();
+	List<Exame> listarExame();
 	Exame listarUnicoExame(Long id);
 	ResponseEntity<String> cadastrarExame(@RequestBody ExameDTO exDTO);
 	ResponseEntity<String> atualizarExame(@RequestBody Exame exame);

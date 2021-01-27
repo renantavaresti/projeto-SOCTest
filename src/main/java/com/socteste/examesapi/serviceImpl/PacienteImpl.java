@@ -33,17 +33,27 @@ public class PacienteImpl implements PacienteService {
 
 	@Override
 	public ResponseEntity<String> cadastrarPaciente(PacienteDTO pacDTO) {
-		if (!pc.existsById(pacDTO.getCpf())) {
-			Paciente paciente = Paciente.builder()
-					.cpf(pacDTO.getCpf())
-					.nomePaciente(pacDTO.getNomePaciente())
-					.build();
-			pc.save(paciente);
-			return ResponseEntity.ok("Paciente cadastrado com sucesso!");
-		} else {
-			return ResponseEntity.status(HttpStatus.CONFLICT)
-					.body("Paciente de CPF " + pacDTO.getCpf() + " já está cadastrado!");
+		if (pc.existsById(pacDTO.getCpf())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Paciente de CPF " + pacDTO.getCpf() + " já está cadastrado!");
 		}
+		Paciente paciente = Paciente.builder()
+				.cpf(pacDTO.getCpf())
+				.nomePaciente(pacDTO.getNomePaciente())
+				.build();
+		pc.save(paciente);
+		return ResponseEntity.ok("Paciente cadastrado com sucesso!");
+		
+//		if (!pc.existsById(pacDTO.getCpf())) {
+//			Paciente paciente = Paciente.builder()
+//					.cpf(pacDTO.getCpf())
+//					.nomePaciente(pacDTO.getNomePaciente())
+//					.build();
+//			pc.save(paciente);
+//			return ResponseEntity.ok("Paciente cadastrado com sucesso!");
+//		} else {
+//			return ResponseEntity.status(HttpStatus.CONFLICT)
+//					.body("Paciente de CPF " + pacDTO.getCpf() + " já está cadastrado!");
+//		}
 	}
 
 	@Override

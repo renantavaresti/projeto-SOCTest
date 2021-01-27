@@ -32,7 +32,7 @@ public class ExameController {
 		
 	@GetMapping("/exames")
 	@ApiOperation(value="Retorna uma lista de Exames")
-	public List<ExameDTO> listarTodosExames() {
+	public List<Exame> listarTodosExames() {
 		return ex.listarExame();
 	}
 

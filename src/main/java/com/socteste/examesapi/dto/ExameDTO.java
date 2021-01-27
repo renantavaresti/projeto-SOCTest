@@ -15,13 +15,6 @@ public class ExameDTO {
 	private String observacao;
 	private String resultadoExame;
 	private String cpf;
-	
-	public ExameDTO(Long id, String nomeExame, String observacao, String resultadoExame, String cpf) {
-		super();
-		this.id = id;
-		this.nomeExame = nomeExame;
-		this.observacao = observacao;
-		this.resultadoExame = resultadoExame;
-		this.cpf = cpf;
-	}
+	private String paciente;
+
 }
